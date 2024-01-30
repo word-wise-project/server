@@ -8,6 +8,6 @@ export const ormConfig: TypeOrmModuleOptions = {
     password: process.env.DB_PASSWORD || 'postgres',
     database: process.env.DB_NAME || 'word-wise',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    synchronize: true, // !== 'production', // Disable in production! Boolean(process.env.NODE_ENV)
-    logging: true, // Set to true to log SQL queries to the console
+    synchronize: true,
+    logging: true,
 };
