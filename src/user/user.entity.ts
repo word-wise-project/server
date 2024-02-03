@@ -28,6 +28,10 @@ export class User {
     @Column()
     password: string;
 
+    @ApiProperty({
+        example: '$2a$05$test0gv...',
+        description: 'Hashed token',
+    })
     @Column({ nullable: true })
     refreshToken: string;
 }
