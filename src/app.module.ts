@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { ormConfig } from './orm.config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
     imports: [
@@ -11,6 +12,7 @@ import { ormConfig } from './orm.config';
         }),
         TypeOrmModule.forRoot(ormConfig),
         UserModule,
+        AuthModule,
     ],
     controllers: [],
     providers: [],
