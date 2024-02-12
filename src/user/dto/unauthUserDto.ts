@@ -1,37 +1,32 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity()
-export class User {
+// User logout dto system, it comes by result
+export class UnauthUserDto {
     @ApiProperty({ example: '1', description: 'Unique identifier' })
-    @PrimaryGeneratedColumn()
     id: number;
 
     @ApiProperty({
         example: 'name',
         description: 'User name to be displayed in the application',
     })
-    @Column()
     username: string;
 
     @ApiProperty({
         example: 'example@gmail.com',
         description: 'User email',
     })
-    @Column()
     email: string;
 
     @ApiProperty({
-        example: 'examplepass',
+        example: 'hashedPassword',
         description: 'User password',
     })
-    @Column()
     password: string;
 
     @ApiProperty({
-        example: '$2a$05$test0gv...',
-        description: 'Hashed token',
+        example: 'null',
+        description:
+            'User refreshToken is null, because the user is not authorized',
     })
-    @Column({ nullable: true })
     refreshToken: string;
 }

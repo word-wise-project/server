@@ -1,0 +1,31 @@
+import { registerAs } from '@nestjs/config';
+
+export default registerAs('database', () => ({
+    // type: 'postgres',
+    // host: process.env.DB_HOST || 'localhost',
+    // port: parseInt(process.env.DB_PORT, 10) || 35432,
+    // username: process.env.DB_USER,
+    // password: process.env.DB_PASSWORD,
+    // database: process.env.DB_NAME,
+    // // entities: [`${__dirname}/../**/*.entity{.ts,.js}`],
+    // // entities: ['dist/**/*.entity{.ts,.js}'],
+    // entities: ['dist/src/user/entities/user.entity.js'],
+    // synchronize: process.env.NODE_ENV === 'development',
+    // logging: process.env.NODE_ENV === 'development',
+    // // migrations: [`${__dirname}/../../db/migrations/*{.ts,.js}`],
+    // migrations: ['dist/migrations/*{.ts,.js}'],
+    // migrationsTableName: 'migrations',
+
+    type: 'postgres',
+    host: 'localhost',
+    port: 5433,
+    username: 'root',
+    password: 'root',
+    database: 'word-wise',
+    entities: ['dist/**/*.entity.js'],
+    logging: true,
+    synchronize: false,
+    migrationsRun: false,
+    migrations: ['dist/**/migrations/*.js'],
+    migrationsTableName: 'history',
+}));

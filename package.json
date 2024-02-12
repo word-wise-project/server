@@ -8,7 +8,7 @@
     "scripts": {
         "build": "nest build",
         "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-        "start": "cross-env NODE_ENV=development nest start",
+        "start": "nest start",
         "start:dev": "nest start --watch",
         "start:debug": "nest start --debug --watch",
         "start:prod": "node dist/main",
@@ -17,7 +17,12 @@
         "test:watch": "jest --watch",
         "test:cov": "jest --coverage",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-        "test:e2e": "jest --config ./test/jest-e2e.json"
+        "test:e2e": "jest --config ./test/jest-e2e.json",
+        "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -d db/typeorm.config.ts",
+        "migration:create": "cross-var ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli migration:create ./src/migrations/$npm_config_name",
+        "migration:generate": "cross-var npm run typeorm -- migration:generate ./db/migrations/$npm_config_name",
+        "migration:run": "npm run build && npm run typeorm -- migration:run",
+        "migration:revert": "npm run typeorm -- migration:revert"
     },
     "dependencies": {
         "@nestjs/common": "^10.0.0",
@@ -30,6 +35,7 @@
         "@nestjs/typeorm": "^10.0.1",
         "bcryptjs": "^2.4.3",
         "cross-env": "^7.0.3",
+        "cross-var": "^1.1.0",
         "dotenv": "^16.4.1",
         "mysql2": "^3.9.1",
         "passport": "^0.7.0",
