@@ -27,7 +27,12 @@ export class AuthService {
 
         const tokens = await this.getTokens(user.id, user.username, user.email);
         await this.updateRefreshToken(user.id, tokens.refreshToken);
-        return tokens;
+        return {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            ...tokens,
+        };
     }
 
     async updateRefreshToken(userId: number, refreshToken: string) {
@@ -52,7 +57,12 @@ export class AuthService {
 
         const tokens = await this.getTokens(user.id, user.username, user.email);
         await this.updateRefreshToken(user.id, tokens.refreshToken);
-        return tokens;
+        return {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            ...tokens,
+        };
     }
 
     async logout(userId: number) {
@@ -69,7 +79,7 @@ export class AuthService {
                     email,
                 },
                 {
-                    secret: process.env.JWT_ACCESS_SECRET, // this.configService.get<string>('JWT_ACCESS_SECRET'),
+                    secret: process.env.JWT_ACCESS_SECRET,
                     expiresIn: '15m',
                 },
             ),
@@ -80,7 +90,7 @@ export class AuthService {
                     email,
                 },
                 {
-                    secret: process.env.JWT_REFRESH_SECRET, // this.configService.get<string>('JWT_REFRESH_SECRET'),
+                    secret: process.env.JWT_REFRESH_SECRET,
                     expiresIn: '7d',
                 },
             ),

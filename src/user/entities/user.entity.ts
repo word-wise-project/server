@@ -11,27 +11,27 @@ export class User {
         example: 'name',
         description: 'User name to be displayed in the application',
     })
-    @Column()
+    @Column({ length: 50 })
     username: string;
 
     @ApiProperty({
         example: 'example@gmail.com',
         description: 'User email',
     })
-    @Column()
+    @Column({ length: 100 })
     email: string;
 
     @ApiProperty({
         example: 'examplepass',
         description: 'User password',
     })
-    @Column()
+    @Column({ length: 60 })
     password: string;
 
     @ApiProperty({
         example: '$2a$05$test0gv...',
         description: 'Hashed token',
     })
-    @Column({ nullable: true })
+    @Column({ nullable: true, length: 100 })
     refreshToken: string;
 }
