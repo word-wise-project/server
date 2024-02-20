@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { AppConfig, DatabaseConfig } from './config';
 import { CollectionModule } from './collection/collection.module';
+import { WordModule } from './word/word.module';
 
 @Module({
     imports: [
@@ -23,6 +24,7 @@ import { CollectionModule } from './collection/collection.module';
         UserModule,
         AuthModule,
         CollectionModule,
+        WordModule,
     ],
     controllers: [],
     providers: [],
