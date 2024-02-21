@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+    BadRequestException,
+    Injectable,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { CreateUserDto } from 'src/user/dto/create-user-dto';
 import { UserService } from 'src/user/user.service';
 import { JwtService } from '@nestjs/jwt';
@@ -68,6 +72,25 @@ export class AuthService {
     async logout(userId: number) {
         const user = await this.userService.getUserById(userId);
         return this.userService.updateUser(user.id, { refreshToken: null });
+    }
+
+    getUserInfo(authorization: string) {
+        if (!authorization || !authorization.startsWith('Bearer ')) {
+            throw new UnauthorizedException('Invalid Authorization header');
+        }
+
+        try {
+            const token = authorization.split(' ')[1];
+            const decoded = this.jwtService.decode(token);
+            return {
+                user_id: decoded.sub,
+                username: decoded.username,
+                email: decoded.email,
+            };
+        } catch (error) {
+            console.error('Error decoding token:', error);
+            return null;
+        }
     }
 
     private async getTokens(userId: number, username: string, email: string) {

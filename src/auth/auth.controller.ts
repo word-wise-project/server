@@ -1,10 +1,12 @@
 import {
     Body,
     Controller,
+    Get,
     HttpCode,
     Post,
     Req,
     UseGuards,
+    Headers,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
@@ -41,5 +43,11 @@ export class AuthController {
     @Post('/logout')
     logout(@Req() req) {
         return this.authService.logout(req.user['sub']); // type Request but I have type any...
+    }
+
+    @UseGuards(AccessTokenGuard)
+    @Get('/getInfo')
+    getUserInfo(@Headers('Authorization') authorization: string) {
+        return this.authService.getUserInfo(authorization);
     }
 }
